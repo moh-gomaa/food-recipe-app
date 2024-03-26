@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Search from "./components/Search";
 import { FoodRecipesModel } from "./interfaces/foodRecipesModel";
+import FoodRecipesLst from "./components/FoodRecipesLst";
 
 function App() {
   const [foodRecipesLst, setFoodRecipesLst] = useState<FoodRecipesModel[]>([]);
@@ -8,10 +9,7 @@ function App() {
   return (
     <div className="App">
       <Search setFoodRecipesLst={setFoodRecipesLst} />
-
-      {foodRecipesLst.map((recipe) => (
-        <h1 key={recipe.id}>{recipe.title}</h1>
-      ))}
+      <FoodRecipesLst foodLst={foodRecipesLst} />
     </div>
   );
 }

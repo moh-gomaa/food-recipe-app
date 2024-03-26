@@ -23,6 +23,8 @@ export default function Search({ setFoodRecipesLst }: SearchProps) {
 
       const data: BasicApiResponseModel<FoodRecipesModel[]> = await res.json();
       const responseObj = data.results;
+
+      console.log("foodRecipesArray", responseObj);
       setFoodRecipesLst(responseObj);
     }
 
