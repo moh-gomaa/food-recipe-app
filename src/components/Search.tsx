@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FoodRecipesModel } from "../interfaces/foodRecipesModel";
 import { BasicApiResponseModel } from "../interfaces/basicApiResponseModel";
+import styles from "./search.module.css";
 
 const BASE_URL = "https://api.spoonacular.com";
 const API_KEY = "d94d4fa6c8b747819feec18fbca00cdc";
@@ -32,8 +33,9 @@ export default function Search({ setFoodRecipesLst }: SearchProps) {
   }, [searchQuery]);
 
   return (
-    <div>
+    <div className={styles.searchContainer}>
       <input
+        className={styles.input}
         type="text"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
