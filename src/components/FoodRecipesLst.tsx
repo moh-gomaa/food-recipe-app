@@ -1,14 +1,16 @@
 import { FoodRecipesModel } from "../interfaces/foodRecipesModel";
 import FoodRecipeItem from "./FoodRecipeItem";
 
-interface FoodRecipesLstProps {
+type FoodRecipesLstProps = {
   foodLst: FoodRecipesModel[];
-}
-export default function FoodRecipesLst({ foodLst }: FoodRecipesLstProps) {
+  setSelectedRecipeId: React.Dispatch<React.SetStateAction<number | undefined>>;
+};
+
+export default function FoodRecipesLst({ foodLst, setSelectedRecipeId }: FoodRecipesLstProps) {
   return (
     <div>
       {foodLst.map((recipe) => (
-        <FoodRecipeItem key={recipe.id} item={recipe} />
+        <FoodRecipeItem key={recipe.id} item={recipe} setSelectedRecipeId={setSelectedRecipeId} />
       ))}
     </div>
   );

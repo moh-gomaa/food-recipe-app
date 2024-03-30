@@ -9,18 +9,16 @@ const API_KEY = "d94d4fa6c8b747819feec18fbca00cdc";
 const RECIPIES_SECTION = "recipes";
 const COMPLEX_SEARCH_QUERY = "complexSearch";
 
-interface SearchProps {
+type SearchProps = {
   setFoodRecipesLst: React.Dispatch<React.SetStateAction<FoodRecipesModel[]>>;
-}
+};
 
 export default function Search({ setFoodRecipesLst }: SearchProps) {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
     async function fetchFood() {
-      const res: Response = await fetch(
-        `${BASE_URL}/${RECIPIES_SECTION}/${COMPLEX_SEARCH_QUERY}?apiKey=${API_KEY}&query=${searchQuery}`
-      );
+      const res: Response = await fetch(`${BASE_URL}/${RECIPIES_SECTION}/${COMPLEX_SEARCH_QUERY}?apiKey=${API_KEY}&query=${searchQuery}`);
 
       const data: BasicApiResponseModel<FoodRecipesModel[]> = await res.json();
       const responseObj = data.results;
@@ -34,13 +32,7 @@ export default function Search({ setFoodRecipesLst }: SearchProps) {
 
   return (
     <div className={styles.searchContainer}>
-      <input
-        className={styles.input}
-        type="text"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder="Search text.."
-      />
+      <input className={styles.input} type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search text.." />
     </div>
   );
 }
