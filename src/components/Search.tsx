@@ -2,12 +2,8 @@ import { useEffect, useState } from "react";
 import { FoodRecipesModel } from "../interfaces/foodRecipesModel";
 import { BasicApiResponseModel } from "../interfaces/basicApiResponseModel";
 import styles from "./search.module.css";
-
-const BASE_URL = "https://api.spoonacular.com";
-const API_KEY = "d94d4fa6c8b747819feec18fbca00cdc";
-
-const RECIPIES_SECTION = "recipes";
-const COMPLEX_SEARCH_QUERY = "complexSearch";
+import { ENVIRONMENT } from "../environment";
+import { API_REQUESTS } from "../api-requests";
 
 type SearchProps = {
   setFoodRecipesLst: React.Dispatch<React.SetStateAction<FoodRecipesModel[]>>;
@@ -18,12 +14,14 @@ export default function Search({ setFoodRecipesLst }: SearchProps) {
 
   useEffect(() => {
     async function fetchFood() {
-      const res: Response = await fetch(`${BASE_URL}/${RECIPIES_SECTION}/${COMPLEX_SEARCH_QUERY}?apiKey=${API_KEY}&query=${searchQuery}`);
+      const res: Response = await fetch(
+        `${ENVIRONMENT.baseUrl}/${API_REQUESTS.recipesSection}/${API_REQUESTS.complexSearchQuery}?apiKey=${ENVIRONMENT.apiKey}&query=${searchQuery}`
+      );
 
       const data: BasicApiResponseModel<FoodRecipesModel[]> = await res.json();
       const responseObj = data.results;
 
-      console.log("foodRecipesArray", responseObj);
+      // console.log("foodRecipesArray", responseObj);
       setFoodRecipesLst(responseObj);
     }
 
